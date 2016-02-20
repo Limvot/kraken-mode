@@ -22,10 +22,23 @@
     (modify-syntax-entry ?/ ". 124b" kraken-mode-syntax-table)
     (modify-syntax-entry ?* ". 23" kraken-mode-syntax-table)
     (modify-syntax-entry ?\n "> b" kraken-mode-syntax-table)
+    (modify-syntax-entry ?_ "w" kraken-mode-syntax-table)
     kraken-mode-syntax-table)
   "Syntax table for kraken-mode")
 (defvar kraken-font-lock-keywords
-  '(("fun \\(\\sw+\\)" (1 font-lock-function-name-face)))
+  '(
+    ("fun *\\(\\sw+\\)" (1 font-lock-function-name-face))
+    ("obj *\\(\\sw+\\)" (1 font-lock-function-name-face))
+    ("\\<\\(for\\|while\\|if\\|else\\|fun\\|var\\|obj\\|return\\|break\\|continue\\|defer\\|import\\)\\>" (1 font-lock-keyword-face))
+    ("\\(: *\\**\\sw+\\(<\\**\\sw*,? *>\\)*\\)" (1 font-lock-type-face))
+    ("\\<\\(int\\|float\\|char\\|void\\|double\\|bool\\)\\>" (1 font-lock-type-face))
+    ;; ("\\(\\.\\sw+\\)" (1 font-lock-function-name-face))
+    ;; ("\\(->\\sw+\\)" (1 font-lock-function-name-face))
+    ;; ("\\(\\.\\|->\\|-\\|*\\|+\\|/\\)" (1 font-lock-keyword-face))
+    ("\\(\\sw+\\(<\\**\\sw*,? *>\\)*(\\)" (1 font-lock-function-name-face))
+    ("\\(,\\|\\.\\|->\\|-\\|*\\|+\\|/\\|\\[\\|\\]\\|>\\|<\\|=\\|;\\|(\\|)\\)" (1 font-lock-type-face))
+    ("\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\)" (1 font-lock-constant-face))
+    )
   "Keyword highlighting specification for `kraken-mode'.")
 
 (define-derived-mode kraken-mode fundamental-mode "Kraken"
